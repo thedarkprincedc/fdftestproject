@@ -1,0 +1,135 @@
+{
+	"userinfo" : [
+		{
+		"username" : "bmosley",
+		"fname" : "Brett",
+		"lname" : "Mosley",
+		"middle" : "T",
+		"ssn" : "579234567",
+		"address" : "2611 Franklin Street NE",
+		"city" : "Washington",
+		"state" : "DC",
+		"zipcode" : "20018",
+		"agency" : "12345",
+		}
+	],
+	"skills" : [{
+		"name" : "Patient Assessment (Medical and Trauma)",
+		"qa" : 5,
+		"do" : 5
+	}, {
+		"name" : "Airway/Ventilation (Simple Adjuncts, Advanced Adjuncts, Supplemental Oxygen Delivery, Bag Valve-Mask – one and two rescuer)",
+		"qa" : 5,
+		"do" : 5
+	}, {
+		"name" : "Cardiac Arrest Management (Therapeutic Modalities, Megacode, Monitor/Defibrillator Knowledge)",
+		"qa" : 5,
+		"do" : 5
+	}, {
+		"name" : "Hemorrhage Control & Splinting (long bone injury, joint injury, and traction splinting)",
+		"qa" : 5,
+		"do" : 5
+	}, {
+		"name" : "IV Therapy / Medication Administration",
+		"qa" : 5,
+		"do" : 5
+	}, {
+		"name" : "Spinal Immobilization (Seated and Supine)",
+		"qa" : 5,
+		"do" : 5
+	}],
+	"training" : [
+		{
+			"name" : "Preparatory",
+			"id" : "preparatory",
+			"required" : 6,
+			"hours_earned" : "",
+			"cic_initials" : ""
+		},
+		{
+			"name" : "Airway Management & Ventilation",
+			"id" : "airways",
+			"required" : 6,
+			"hours_earned" : "",
+			"cic_initials" : ""
+		},{
+			"name" : "Trauma",
+			"id" : "trauma",
+			"required" : 10,
+			"hours_earned" : "",
+			"cic_initials" : ""
+		},{
+			"name" : "Medical (see sub categories)",
+			"list" : [
+				{
+					"name" : "Pulmonary and Cardiology",
+					"id" : "pulmonary",
+					"required" : 6,
+					"hours_earned" : "6",
+					"cic_initials" : ""
+				},{
+					"name" : "Neurology/Endocrinology/Allergies & Anaphylaxis",
+					"id" : "neurology",
+					"required" : 3,
+					"hours_earned" : "",
+					"cic_initials" : ""
+				},{
+					
+					"name" : "Gastroentaerology/Renal & Urology/Toxicology/Hematology", 
+					"id" : "gastro",
+					"required" : 3,
+					"hours_earned" : "",
+					"cic_initials" : ""					
+				},{
+					"name" : "Environmental Conditions/Infectious & Communicable Diseases/Behavioral", 
+					"id" : "environmental",
+					"required" : 3,
+					"hours_earned" : "",
+					"cic_initials" : ""
+					
+				},{
+					"name" : "Gynecology and Obstetrics",
+					"id" : "gynecology", 
+					"required" : 3,
+					"hours_earned" : "",
+					"cic_initials" : ""
+				}
+				
+			]
+		},{
+			"name" : "Special Considerations (see sub categories)",
+			"list" : [
+				{
+					"name" : "Neonatology and Pediatrics", 
+					"id" : "neonatology", 
+					"required" : 3, 
+					"hours_earned" : "",
+					"cic_initials" : ""
+				},
+				{
+					"name" : "Abuse and Assault",
+					"id" : "abuse",  
+					"required" : 1,
+					"hours_earned" : "",
+					"cic_initials" : ""
+				},
+				{
+					"name" : "Patients w/Special Challenges & Acute Interventions for Chronic Care Patients", 
+					"id" : "specialchallenges", 
+					"required" : 2,
+					"hours_earned" : "",
+					"cic_initials" : ""
+				},
+				{
+					"name" : "Operations", 
+					"id" : "operations", 
+					"required" : 2, 
+					"hours_earned" : "",
+					"cic_initials" : ""
+				}
+			]
+		}
+	],
+	"Education" : []
+
+}
