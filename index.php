@@ -13,58 +13,62 @@
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 				<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="js/bootstrap-3.3.5-dist/css/bootstrap.min.css">
 		
 		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		
-<style>
-	.alncenter { text-align: center; }
-	
-	h1{
-		font-size: 18pt;
-	}
-	h2{
-		font-size: 12pt;
-	}
-	h3{
-		font-size: 10pt;
-	}
-	body{
-		font-size: 8pt;
-	}
-</style>
+		<link rel="stylesheet" href="js/bootstrap-3.3.5-dist/css/bootstrap-theme.css">	
+		<link rel="stylesheet" href="css/style.css">
 	</head>
 
 	<body>
+		
 		<div class="container">
 
 		<form class="form-horizontal">
-		<h2>EMT Recertification Forms</h2>
 		
-		<div id="info"></div>
-		</form>
-		<br/>
-		<br/>
-		<table id="table_id" class="display">
+		<div class="row">
+			<div class="class-xs-12">
+				<h2>EMT Recertification Forms</h2>
+				<h2>Information</h2>
+			</div>
+		</div>
+			<div class="col-xs-6">
+				<div id="userinfo"></div>
+				<a href="course_summary.php?username=bmosley">Course Summary</a><br/><br/>
+				<table id="table_id" class="display">
 			<thead>
 				<tr>
 					<th>Name</th>
 					<th>Link</th>
 				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+				
+				
+			</div>
+			<div class="col-xs-6">
+				<div id="skillinfo"></div>
+				<div id="training"></div>
+				<!--<div id="info"></div>-->
+			</div>
+		
+		
+		
+		</form>
+		<br/>
+		<br/>
+		
 		</div>
 		<script src="js/jquery-1.11.3.min.js"></script>
 		
 		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="js/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 		<!-- jQuery -->
 
 		<!-- DataTables -->
@@ -91,8 +95,8 @@
 				$("body").on("click", "#emt_form", showform);
 				
 				$('#table_id').DataTable({
-					data : [["2015 Paramedic Recertification Packet", "<a href='#' id='paramedic_form'>PDF</a>,&nbsp;<a href='../fdfprototype/scripts/paramedic_cert_print.php'>Web</a>"], 
-					["2015 EMT Recertification Packet", "<a href='#' id='emt_form'>PDF</a>,&nbsp;<a href='../fdfprototype/scripts/emt_cert_print.php'>Web</a>"]]
+					data : [["2015 Paramedic Recertification Packet", "<a href='#' id='paramedic_form'>PDF</a>,&nbsp;<a href='../fdftestproject/scripts/paramedic_cert_print.php'>Web</a>,&nbsp;<a href='certification_summary.php?username=bmosley'>Certification Summary</a>"], 
+					["2015 EMT Recertification Packet", "<a href='#' id='emt_form'>PDF</a>,&nbsp;<a href='../fdftestproject/scripts/emt_cert_print.php'>Web</a>"]]
 				});
 				
 				var emtdata = {
@@ -231,6 +235,57 @@
 					"Education" : []
 
 				};
+				
+				$.get("scripts/emtcertendpoint.php",{"action" : "getuserinfo"}).then(function(msg){
+					var arr = "";
+					$.each(msg, function(ind, val){
+						arr += "<tr><td>"+ind+"</td><td>"+val+"</td></tr>";
+					});
+					$("#userinfo").html("<table class='table table-stripped'><thead><tr><th>Name</th><th>Value</th></tr></thead>\
+										<tbody>"+arr+"</tbody></table>");
+				});
+				
+				$.get("scripts/emtcertendpoint.php",{"action" : "getskills"}).then(function(msg){
+					var arr = "";
+					$.each(msg, function(ind, val){
+						arr += "<tr><td>"+val.name+"</td><td>"+val.qa+"</td><td>"+val.do+"</td></tr>";
+					});
+					$("#skillinfo").html("<table class='table table-stripped'><thead><tr><th>Skill</th><th>QA</th><th>DO</th></tr></thead>\
+										<tbody>"+arr+"</tbody></table>");
+				});
+				
+				$.get("scripts/emtcertendpoint.php",{"action" : "gettraining"}).then(function(msg){
+					var arr = "";	
+					var stack =msg.reverse();
+					var educationList = "";
+					while(stack.length>0){
+						
+						var curr = stack.pop();
+						curr.name = (typeof(curr.sub) == "undefined") ? curr.name : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + curr.name;
+						curr.required = (typeof(curr.required) == "undefined") ? "" : curr.required;
+						curr.hours_earned = (typeof(curr.hours_earned) == "undefined") ? "" : curr.hours_earned;
+						
+						var color = (curr.required == curr.hours_earned) ? "green" 
+										:  ( (curr.required - curr.hours_earned) > 0) ? "red"
+										: "black";
+						color = ((curr.required == "") && (curr.hours_earned == "")) ? "black" : color;
+						
+						arr += "<tr style='color:"+ color +"'><td>"+curr.name+"</td><td>"+curr.required+"</td><td>"+curr.hours_earned+"</td></tr>";
+						
+						if(typeof(curr.list) !== "undefined"){
+							$.each(curr.list,function(ind, val){
+								val.sub = true;
+								stack.push(val);
+							});
+						}
+					}
+					
+					$("#training").html("<table class='table table-striped'><thead><tr><th>Skills</th><th>Required</th><th>Earned</th></tr></thead>\
+										<tbody>"+arr+"</tbody></table>");
+					/*$("#training").append("<h2>Education</h2>\
+										<table class='table table-striped'><thead><tr><th>Date</th><th>Topics</th><th>Hours</th></tr></thead>\
+										<tbody>" + education + "</tbody></table>");*/
+				});
 				var retString = "";
 				$.each(emtdata, function($ind, $val){
 					if(!Array.isArray($val)){
@@ -238,6 +293,8 @@
 					}
 					else{
 						var arr = "";
+						
+						/*
 						if($ind == "userinfo"){
 							$.each($val[0], function(ind,val){
 								 arr += "<tr>";
@@ -246,8 +303,9 @@
 								 arr += "</tr>";
 							});
 							retString += "<h2>Information</h2><div class='col-xs-6'><h2>User Info</h2><table class='table table-striped'><thead><tr><th>Name</th><th>Value</th></tr></thead><tbody>"+arr+"</tbody></table></div>";
-						}
-						if($ind == "skills"){
+						}*/
+						
+						/*if($ind == "skills"){
 							 arr = "";
 							$.each($val, function(ind,val){
 								 arr += "<tr>";
@@ -257,7 +315,7 @@
 								 arr += "</tr>";
 							});
 							retString += "<div class='col-xs-6'><h2>Skills</h2><table class='table table-striped'><thead><tr><th>Skills</th><th>QA</th><th>Direct Observation</th></tr></thead><tbody>"+arr+"</tbody></table></div>";
-						}
+						}*/
 						if($ind == "training"){
 							
 							//training
