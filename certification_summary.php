@@ -1,7 +1,9 @@
 <?php
-	$json = file_get_contents("endpoints/certsummarydummy.json");
-	$data = json_decode($json, TRUE);
+	//$json = file_get_contents("endpoints/certsummarydummy.json");
+	//$data = json_decode($json, TRUE);
 	//	print_r($data);
+	$json = file_get_contents("http://localhost:8888/fdftestproject/endpoints/index.php?action=getCertCourseSummary");
+	$data = json_decode($json, TRUE);
 	$date = $data["date"];
 	$variable1 = $data["data"];
 	$name = "Brett Mosley";
@@ -27,7 +29,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<h2 class="alcenter">Date of Summary: <?php print($date); ?></h2>
+			<h2 class="alcenter">Certification Summary: <?php print($date); ?></h2>
 			<table class="table table-striped">
 				<thead>
 				<tr>

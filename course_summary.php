@@ -1,8 +1,13 @@
 <?php
-	$variable1 = array();
-	$variable1[] = array("name" => "frffr");
-	$fullname = "";
-	$date = "";
+	//$json = file_get_contents("endpoints/coursesummarydummy.json");
+	//print($json);
+	$json = file_get_contents("http://localhost:8888/fdftestproject/endpoints/index.php?action=getCourseSummary");
+	//print($json);
+	$data = json_decode($json, TRUE);
+	//print_r($data);
+	$variable1 = $data["data"];
+	$fullname = "Brett Mosley";
+	$date = "10/23/1932";
 ?>
 <!doctype html>
 
@@ -10,7 +15,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>FDFPrototype</title>
+		<title><?php print("EMSPlumbline - Course Summary for {$fullname} "); ?></title>
 		<meta name="description" content="The HTML5 Herald">
 		<meta name="author" content="SitePoint">
 		<!-- DataTables CSS -->
@@ -26,7 +31,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<h2><?php print("{$fullname} Course Expiration Date of {$date}"); ?></h2>
+			<h2><?php print("Course Summary for {$fullname} {$date}"); ?></h2>
 			<table class="table table-striped">
 				<thead>
 				<tr>
@@ -44,12 +49,21 @@
 					<?php foreach ($variable1 as $key => $value): ?>
 					<tr>
 						<td><?php print($value["name"]); ?></td>
-						<td><?php print($value["date"]); ?></td>
-						<td><?php print($value["divisions"]); ?></td>
-						<td><?php print($value["corecontent_hrs"]); ?></td>
-						<td><?php print($value["noncorecontent_hrs"]); ?></td>
-						<td><?php print($value["credit_hours"]); ?></td>
-						<td><?php print($value["training_format"]); ?></td>
+						<td><?php print($value["completion_date"]); ?></td>
+						
+						<?php
+							$divisions  = "";
+							$hourscc = "";
+							$hoursnoncc = "";
+							foreach ($value["division"] as &$value2) {
+								$divisions .= "{$value2["name"]}<br/>";
+								$hourscc .= "{$value2["hoursofcc"]}<br/>";
+								$hoursnoncc .= "{$value2["hoursofnoncc"]}<br/>";
+							}
+							print("<td>{$divisions}</td><td>{$hourscc}</td><td>{$hoursnoncc}</td>");
+						?>
+						<td><?php print($value["classhours"]); ?></td>
+						<td><?php print($value["format"]); ?></td>
 						<td><?php print($value["state_minimums"]); ?></td>
 					</tr>
 					<?php  endforeach; ?>

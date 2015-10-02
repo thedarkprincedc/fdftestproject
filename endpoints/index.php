@@ -29,4 +29,12 @@
 	function getEducation($request, $jsonContent){
 		return $jsonContent->educations;
 	}
+	function getCourseSummary($request, $jsonContent){
+		$content = file_get_contents("coursesummarydummy.json");
+	 	return json_decode($content);
+	}
+	function getCertCourseSummary($request, $jsonContent){
+		$content = file_get_contents("certsummarydummy.json");
+	 	return json_decode($content);
+	}
 ?>

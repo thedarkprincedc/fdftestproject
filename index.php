@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>FDFPrototype</title>
+		<title>EMSPlumbline</title>
 		<meta name="description" content="The HTML5 Herald">
 		<meta name="author" content="SitePoint">
 		<!-- DataTables CSS -->
@@ -34,7 +34,6 @@
 		</div>
 			<div class="col-xs-6">
 				<div id="userinfo"></div>
-				<a href="course_summary.php?username=bmosley">Course Summary</a><br/><br/>
 				<table id="table_id" class="display">
 			<thead>
 				<tr>
@@ -96,7 +95,7 @@
 				
 				$('#table_id').DataTable({
 					data : [["2015 Paramedic Recertification Packet", "<a href='#' id='paramedic_form'>PDF</a>,&nbsp;<a href='../fdftestproject/scripts/paramedic_cert_print.php'>Web</a>,&nbsp;<a href='certification_summary.php?username=bmosley'>Certification Summary</a>"], 
-					["2015 EMT Recertification Packet", "<a href='#' id='emt_form'>PDF</a>,&nbsp;<a href='../fdftestproject/scripts/emt_cert_print.php'>Web</a>"]]
+					["2015 EMT Recertification Packet", "<a href='#' id='emt_form'>PDF</a>,&nbsp;<a href='../fdftestproject/scripts/emt_cert_print.php'>Web</a>,&nbsp;<a href='certification_summary.php?username=bmosley'>Certification Summary</a>"]]
 				});
 				
 				var emtdata = {
@@ -241,8 +240,8 @@
 					$.each(msg, function(ind, val){
 						arr += "<tr><td>"+ind+"</td><td>"+val+"</td></tr>";
 					});
-					$("#userinfo").html("<table class='table table-stripped'><thead><tr><th>Name</th><th>Value</th></tr></thead>\
-										<tbody>"+arr+"</tbody></table>");
+					$("#userinfo").html("<table class='table'><thead><tr><th>Name</th><th>Value</th></tr></thead>\
+										<tbody>"+arr+"</tbody><tfoot><tr><td>Summary Page</td><td><a href='course_summary.php?username=bmosley'>Course Summary</a><br/><br/></td></tr></tfoot></table>");
 				});
 				
 				$.get("scripts/emtcertendpoint.php",{"action" : "getskills"}).then(function(msg){
@@ -250,7 +249,7 @@
 					$.each(msg, function(ind, val){
 						arr += "<tr><td>"+val.name+"</td><td>"+val.qa+"</td><td>"+val.do+"</td></tr>";
 					});
-					$("#skillinfo").html("<table class='table table-stripped'><thead><tr><th>Skill</th><th>QA</th><th>DO</th></tr></thead>\
+					$("#skillinfo").html("<table class='table'><thead><tr><th>Skill</th><th>QA</th><th>DO</th></tr></thead>\
 										<tbody>"+arr+"</tbody></table>");
 				});
 				
@@ -280,7 +279,7 @@
 						}
 					}
 					
-					$("#training").html("<table class='table table-striped'><thead><tr><th>Skills</th><th>Required</th><th>Earned</th></tr></thead>\
+					$("#training").html("<table class='table'><thead><tr><th>Skills</th><th>Required</th><th>Earned</th></tr></thead>\
 										<tbody>"+arr+"</tbody></table>");
 					/*$("#training").append("<h2>Education</h2>\
 										<table class='table table-striped'><thead><tr><th>Date</th><th>Topics</th><th>Hours</th></tr></thead>\

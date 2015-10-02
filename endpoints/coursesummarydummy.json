@@ -1,0 +1,43 @@
+{
+    "data": [
+        {
+            "name": "Example Course A",
+            "completion_date": "12/12/13",
+            "division": [
+                {
+                    "name": "EMS Operations",
+                    "hoursofcc": 1,
+                    "hoursofnoncc": 3
+                }
+            ],
+             "classhours": 10,
+            "format": "In Class"
+        },
+        {
+            "name": "Example Course B",
+            "completion_date": "10/30/13",
+            "division": [
+                {
+                    "name": "Patient Assessment",
+                    "hoursofcc": 2,
+                    "hoursofnoncc": 2,
+                    "state_minimum": 3
+                },
+                {
+                    "name": "Airways",
+                    "hoursofcc": 2,
+                    "hoursofnoncc": 3,
+                    "state_minimum": 3
+                },
+                {
+                    "name": "EMS Operations",
+                    "hoursofcc": 0,
+                    "hoursofnoncc": 3,
+                    "state_minimum": 3
+                }
+            ],
+            "classhours": 10,
+            "format": "In Class"
+        }
+    ]
+}
