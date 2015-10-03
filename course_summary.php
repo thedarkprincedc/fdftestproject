@@ -1,7 +1,9 @@
 <?php
 	//$json = file_get_contents("endpoints/coursesummarydummy.json");
 	//print($json);
-	$json = file_get_contents("http://localhost:8888/fdftestproject/endpoints/index.php?action=getCourseSummary");
+	//print("<pre>");
+	//print_r($_SERVER["HTTP_HOST"]);
+	$json = file_get_contents("http://{$_SERVER["HTTP_HOST"]}/fdftestproject/endpoints/index.php?action=getCourseSummary");
 	//print($json);
 	$data = json_decode($json, TRUE);
 	//print_r($data);
