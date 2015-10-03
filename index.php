@@ -94,8 +94,8 @@
 				$("body").on("click", "#emt_form", showform);
 				
 				$('#table_id').DataTable({
-					data : [["2015 Paramedic Recertification Packet", "<a href='#' id='paramedic_form'>PDF</a>,&nbsp;<a href='../fdftestproject/scripts/paramedic_cert_print.php'>Web</a>,&nbsp;<a href='certification_summary.php?username=bmosley'>Certification Summary</a>"], 
-					["2015 EMT Recertification Packet", "<a href='#' id='emt_form'>PDF</a>,&nbsp;<a href='../fdftestproject/scripts/emt_cert_print.php'>Web</a>,&nbsp;<a href='certification_summary.php?username=bmosley'>Certification Summary</a>"]]
+					data : [["2015 Paramedic Recertification Packet", "<a href='#' id='paramedic_form'>PDF</a>,&nbsp;<a href='../fdftestproject/scripts/paramedic_cert_print.php'>Web</a>,&nbsp;<a href='certification_summary.php?username=bmosley'>Summary</a>"], 
+					["2015 EMT Recertification Packet", "<a href='#' id='emt_form'>PDF</a>,&nbsp;<a href='../fdftestproject/scripts/emt_cert_print.php'>Web</a>,&nbsp;<a href='certification_summary.php?username=bmosley'>Summary</a>"]]
 				});
 				
 				var emtdata = {
