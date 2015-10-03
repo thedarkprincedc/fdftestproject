@@ -2,7 +2,7 @@
 	//$json = file_get_contents("endpoints/certsummarydummy.json");
 	//$data = json_decode($json, TRUE);
 	//	print_r($data);
-	$json = file_get_contents("http://{$_SERVER[HTTP_HOST]}/fdftestproject/endpoints/index.php?action=getCertCourseSummary");
+	$json = file_get_contents("http://{$_SERVER["HTTP_HOST"]}/fdftestproject/endpoints/index.php?action=getCertCourseSummary");
 	$data = json_decode($json, TRUE);
 	$date = $data["date"];
 	$variable1 = $data["data"];
